@@ -5,6 +5,7 @@ public class GameMenger : MonoBehaviour
     public GameObject ball;
     int score = 0;
     private GameObject[] pins;
+    [SerializeField] public float power;
     void Start()
     {
         pins = GameObject.FindGameObjectsWithTag("Pin");
@@ -22,7 +23,7 @@ public class GameMenger : MonoBehaviour
     void MoveBall()
     {
         Vector3 position = ball.transform.position;
-        position += Vector3.right * Input.GetAxis("Horizontal") * Time.deltaTime;
+        position += Vector3.right * Input.GetAxis("Horizontal") * power;
         position.x = Mathf.Clamp(position.x, -7f, 7f); 
         ball.transform.position = position;
         //ball.transform.Translate(Vector3.right * Input.GetAxis("Horizontal")* Time.deltaTime);
