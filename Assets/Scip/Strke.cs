@@ -1,26 +1,14 @@
-using System;
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class Contact : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AudioSource pinsAudio;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Bowling")
+        if(other.gameObject.name == "Bowling")
         {
-            AudioSource source = GetComponent<AudioSource>();
-            source.Play();
+            pinsAudio.Play();
         }
     }
 }

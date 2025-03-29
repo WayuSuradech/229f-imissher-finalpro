@@ -1,43 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameMenger : MonoBehaviour
 {
+    // Start is called before the first frame update
     public GameObject ball;
-    int score = 0;
-    private GameObject[] pins;
+    Rigidbody rb;
     [SerializeField] public float power;
+    public AudioSource ballAudio;
+
+    [SerializeField]
+    float force;
+
+    bool isShooting = false;
+    bool isGoingRight = true;
+
     void Start()
     {
-        pins = GameObject.FindGameObjectsWithTag("Pin");
+        rb = ball.GetComponent<Rigidbody>();
+        rb.maxAngularVelocity = 50;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveBall();
-        if (Input.GetKeyDown(KeyCode.Space) || ball.transform.position.y < -20)
+        if(Input.GetKeyDown(KeyCode.W))
         {
-            CountPinsDown();
+            rb.AddForce(Vector3.forward * force);
+            ballAudio.Play();
+            isShooting = true;
         }
-    }
-    void MoveBall()
-    {
-        Vector3 position = ball.transform.position;
-        position += Vector3.right * Input.GetAxis("Horizontal") * power;
-        position.x = Mathf.Clamp(position.x, -7f, 7f); 
-        ball.transform.position = position;
-        //ball.transform.Translate(Vector3.right * Input.GetAxis("Horizontal")* Time.deltaTime);
+
+        if(Input.GetKey(KeyCode.Space))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if(!isShooting)
+        {
+            MoveBall();
+        }
     }
 
-    void CountPinsDown()
+    void MoveBall()
     {
-        for (int i = 0; i < pins.Length; i++)
+        if(isGoingRight)
         {
-            if (pins[i].transform.eulerAngles.z > 5 && pins[i].transform.eulerAngles.z < 355)
-            {
-                score++;
-            }
+            ball.transform.Translate(Vector3.right * power );
         }
-        Debug.Log(score);
+        else
+        {
+            ball.transform.Translate(Vector3.left * power );
+        }
+
+        if (ball.transform.position.x > 7f)
+        {
+            isGoingRight = false;
+        }
+
+
+        if(ball.transform.position.x < -7f)
+        {
+            isGoingRight = true;
+        }
+
     }
 }
