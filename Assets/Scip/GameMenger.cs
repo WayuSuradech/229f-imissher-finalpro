@@ -7,12 +7,12 @@ using UnityEngine.Audio;
 public class GameMenger : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject ball;
     Rigidbody rb;
-    [SerializeField] public float Speed;
+    public GameObject ball;
     public AudioSource ballAudio;
+    [SerializeField] public float Speed;
     [SerializeField] float force;
-
+    
     bool isShooting = false;
     bool isGoingRight = true;
 
@@ -31,7 +31,6 @@ public class GameMenger : MonoBehaviour
             ballAudio.Play();
             isShooting = true;
         }
-
         if(Input.GetKey(KeyCode.Space))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -62,6 +61,5 @@ public class GameMenger : MonoBehaviour
         {
             isGoingRight = true;
         }
-
     }
 }
