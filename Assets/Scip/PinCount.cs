@@ -17,7 +17,7 @@ public class PinCount : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) || ball.transform.position.y < -3)
+        if (ball.transform.position.y < 0)
         {
             CountPins();
         }
