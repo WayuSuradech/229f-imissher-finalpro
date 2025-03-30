@@ -9,11 +9,9 @@ public class GameMenger : MonoBehaviour
     // Start is called before the first frame update
     public GameObject ball;
     Rigidbody rb;
-    [SerializeField] public float power;
+    [SerializeField] public float Speed;
     public AudioSource ballAudio;
-
-    [SerializeField]
-    float force;
+    [SerializeField] float force;
 
     bool isShooting = false;
     bool isGoingRight = true;
@@ -49,20 +47,18 @@ public class GameMenger : MonoBehaviour
     {
         if(isGoingRight)
         {
-            ball.transform.Translate(Vector3.right * power );
+            ball.transform.Translate(Vector3.right * Speed * Time.deltaTime);
         }
         else
         {
-            ball.transform.Translate(Vector3.left * power );
+            ball.transform.Translate(Vector3.left * Speed  * Time.deltaTime );
         }
-
-        if (ball.transform.position.x > 7f)
+        
+        if (ball.transform.position.x > 4.5f)
         {
             isGoingRight = false;
         }
-
-
-        if(ball.transform.position.x < -7f)
+        if(ball.transform.position.x < -4.5f)
         {
             isGoingRight = true;
         }
