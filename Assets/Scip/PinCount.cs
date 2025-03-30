@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PinCount : MonoBehaviour
 {
     public GameObject ball;
     public int score = 0;
     GameObject[] pins;
-
+    public Text YouwinUi;
     public Text scoreUi;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
