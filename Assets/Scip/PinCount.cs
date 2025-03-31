@@ -7,11 +7,13 @@ public class PinCount : MonoBehaviour
     public GameObject ball;
     public int score = 0;
     GameObject[] pins;
-    public Text YouwinUi;
     public Text scoreUi;
+    public GameObject panel;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        panel.SetActive(false);
         pins = GameObject.FindGameObjectsWithTag("Pin");
     }
 
@@ -21,6 +23,11 @@ public class PinCount : MonoBehaviour
         if (ball.transform.position.y < 0)
         {
             CountPins();
+        }
+
+        if (ball.transform.position.y < -1)
+        {
+            ShowPins();
         }
     }
 
@@ -36,5 +43,10 @@ public class PinCount : MonoBehaviour
             }
             scoreUi.text = score.ToString();
         }
+    }
+
+    void ShowPins()
+    {
+        panel.SetActive(true);
     }
 }
